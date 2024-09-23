@@ -55,9 +55,9 @@ public class WuAlgorithm {
 
         for (int x = (int) (xPixel1 + 1); x <= x2; x++) {
             currentColor = new Color(
-                    currentColor.getRed() + rStep,
-                    currentColor.getGreen() + gStep,
-                    currentColor.getBlue() + bStep,
+                    clamp(currentColor.getRed() + rStep),
+                    clamp(currentColor.getGreen() + gStep),
+                    clamp(currentColor.getBlue() + bStep),
                     1.0
             );
 
@@ -66,7 +66,9 @@ public class WuAlgorithm {
             intery += gradient;
         }
     }
-
+    private static double clamp(double value) {
+        return Math.min(Math.max(value, 0.0), 1.0);
+    }
     private static double fractionalPart(double x) {
         return x - Math.floor(x);
     }
