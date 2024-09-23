@@ -1,5 +1,6 @@
 package com.example.demo2;
 
+import com.example.demo2.algorithms.BresenhamAlgorithm;
 import com.example.demo2.algorithms.DDA_Algorithm;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -27,7 +28,8 @@ public class Application extends javafx.application.Application {
         TextField x2Field = new TextField();
         TextField y2Field = new TextField();
 
-        Button drawDDABButton = new Button("Нарисовать линию DDA");
+        Button drawDDABButton = new Button("DDA");
+        Button drawBresenhamBButton = new Button("Брезехем");
         Button clearButton = new Button("Очистить холст");
 
 
@@ -46,7 +48,8 @@ public class Application extends javafx.application.Application {
         inputGrid.add(y2Field, 3, 1);
 
         inputGrid.add(drawDDABButton, 1, 2, 2, 1);
-        inputGrid.add(clearButton, 3, 2, 2, 1);
+        inputGrid.add(drawBresenhamBButton, 3, 2, 2, 1);
+        inputGrid.add(clearButton, 5, 2, 2, 1);
 
         drawDDABButton.setOnAction(e -> {
             try {
@@ -56,13 +59,25 @@ public class Application extends javafx.application.Application {
                 int x2 = Integer.parseInt(x2Field.getText());
                 int y2 = Integer.parseInt(y2Field.getText());
 
-                DDA_Algorithm.ddaLine(gc, x1, y1, x2, y2);
+                DDA_Algorithm.drawLine(gc, x1, y1, x2, y2);
 
             } catch (NumberFormatException ex) {
                 System.out.println("Неверный формат координат. Введите целые числа.");
             }
         });
 
+        drawBresenhamBButton.setOnAction(e -> {
+            try{
+                int x1 = Integer.parseInt(x1Field.getText());
+                int y1 = Integer.parseInt(y1Field.getText());
+                int x2 = Integer.parseInt(x2Field.getText());
+                int y2 = Integer.parseInt(y2Field.getText());
+
+                BresenhamAlgorithm.drawLine(gc, x1, y1, x2, y2);
+            } catch (NumberFormatException ex) {
+                System.out.println("Неверный формат координат. Введите целые числа.");
+            }
+        });
 
         clearButton.setOnAction(e -> clearCanvas(gc));
 

@@ -3,7 +3,7 @@ package com.example.demo2.algorithms;
 import javafx.scene.canvas.GraphicsContext;
 
 public class DDA_Algorithm {
-    public static void ddaLine(GraphicsContext gc, int x1, int y1, int x2, int y2) {
+    public static void drawLine(GraphicsContext gc, int x1, int y1, int x2, int y2) {
         int dx = x2 - x1;
         int dy = y2 - y1;
 
