@@ -1,4 +1,4 @@
-package math;
+package math.vectors;
 
 public interface Vector<T> {
 
@@ -17,5 +17,7 @@ public interface Vector<T> {
     void normalize();
 
     double scalarMultiplication(T other);
+
+    String toString();
 }
 

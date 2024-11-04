@@ -1,4 +1,4 @@
-package math;
+package math.vectors;
 
 public class Vector2f implements Vector<Vector2f> {
     private double x;
@@ -20,17 +20,20 @@ public class Vector2f implements Vector<Vector2f> {
 
     @Override
     public boolean isEqual(Vector2f other) {
-        return Math.abs(x - other.x) < EPS && Math.abs(y - other.y) < EPS;
+        return Math.abs(x - other.x) < EPS &&
+                Math.abs(y - other.y) < EPS;
     }
 
     @Override
     public Vector2f add(Vector2f other) {
-        return new Vector2f(this.x + other.x, this.y + other.y);
+        return new Vector2f(this.x + other.x,
+                            this.y + other.y);
     }
 
     @Override
     public Vector2f subtract(Vector2f other) {
-        return new Vector2f(this.x - other.x, this.y - other.y);
+        return new Vector2f(this.x - other.x,
+                            this.y - other.y);
     }
 
     @Override

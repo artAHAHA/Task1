@@ -1,4 +1,4 @@
-package math;
+package math.vectors;
 
 
 public class Vector3f implements Vector<Vector3f> {
@@ -26,18 +26,24 @@ public class Vector3f implements Vector<Vector3f> {
 
     @Override
     public boolean isEqual(Vector3f other) {
-        return Math.abs(x - other.x) < EPS && Math.abs(y - other.y) < EPS && Math.abs(z - other.z) < EPS;
+        return Math.abs(x - other.x) < EPS &&
+                Math.abs(y - other.y) < EPS &&
+                 Math.abs(z - other.z) < EPS;
     }
 
 
     @Override
     public Vector3f add(Vector3f other) {
-        return new Vector3f(this.x + other.x, this.y + other.y, this.z + other.z);
+        return new Vector3f(this.x + other.x,
+                            this.y + other.y,
+                            this.z + other.z);
     }
 
     @Override
     public Vector3f subtract(Vector3f other) {
-        return new Vector3f(this.x - other.x, this.y - other.y, this.z - other.z);
+        return new Vector3f(this.x - other.x,
+                            this.y - other.y,
+                            this.z - other.z);
     }
 
     @Override
@@ -56,7 +62,11 @@ public class Vector3f implements Vector<Vector3f> {
 
     @Override
     public double getLength() {
-        double length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
+        double length = Math.sqrt(
+                        Math.pow(this.x, 2) +
+                        Math.pow(this.y, 2) +
+                        Math.pow(this.z, 2)
+                        );
         return Math.round(length * 10.0) / 10.0;
     }
 
@@ -73,7 +83,9 @@ public class Vector3f implements Vector<Vector3f> {
 
     @Override
     public double scalarMultiplication(Vector3f other) {
-        return (this.x * other.x + this.y * other.y + this.z * other.z);
+        return (this.x * other.x +
+                this.y * other.y +
+                this.z * other.z);
     }
 
     public Vector3f vectorProduct(Vector3f other) {
