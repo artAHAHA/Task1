@@ -11,5 +11,7 @@ public interface Matrix<T extends Matrix<T, V>, V extends Vector<V>>{
     V multiplyingMatrixByVector(V vector);
     T matrixProduct(T other);
     T transpose();
+    double findDeterminant();
+    T findInverseMatrix();
 
 }

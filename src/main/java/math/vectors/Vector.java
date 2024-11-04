@@ -11,7 +11,7 @@ public interface Vector<T> {
     T subtract(T other);
     void multiplyingVectorByScalar(double scalar);
 
-    void dividingVectorByScalar(double scalar);
+    void dividingVectorByScalar(double scalar) throws ArithmeticException;
 
     double getLength();
     void normalize();

@@ -44,6 +44,9 @@ public class Vector2f implements Vector<Vector2f> {
 
     @Override
     public void dividingVectorByScalar(double scalar) {
+        if(scalar == 0){
+            throw new ArithmeticException("На 0 делить нельзя");
+        }
         this.x = Math.round(this.x / scalar * 10.0) / 10.0;
         this.y = Math.round(this.y / scalar * 10.0) / 10.0;
     }

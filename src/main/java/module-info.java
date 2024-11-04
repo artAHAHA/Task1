@@ -10,6 +10,8 @@ module com.example {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires org.junit.jupiter.api;
+    //requires org.junit.jupiter.api;
 
     opens com.example.demo2 to javafx.fxml;
     exports com.example.demo2;

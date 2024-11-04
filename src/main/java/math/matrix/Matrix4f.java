@@ -2,7 +2,7 @@ package math.matrix;
 
 import math.vectors.Vector4f;
 
-public class Matrix4f implements Matrix<Matrix4f, Vector4f>{
+public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     private final double[][] elements;
 
     public Matrix4f(double[][] elements) {
@@ -15,13 +15,30 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f>{
         }
     }
 
+    public static Matrix4f setZero() {
+        return new Matrix4f(new double[][]{
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        });
+    }
+
+    public static Matrix4f setIdentity() {
+        return new Matrix4f(new double[][]{
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 1}
+        });
+    }
 
     @Override
     public Matrix4f add(Matrix4f other) {
         double[][] result = new double[4][4];
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                result[i][j] = this.elements[i][j] + this.elements[i][j];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                result[i][j] = this.elements[i][j] + other.elements[i][j];
             }
         }
         return new Matrix4f(result);
@@ -30,9 +47,9 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f>{
     @Override
     public Matrix4f subtract(Matrix4f other) {
         double[][] result = new double[4][4];
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                result[i][j] = this.elements[i][j] - this.elements[i][j];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                result[i][j] = this.elements[i][j] - other.elements[i][j];
             }
         }
         return new Matrix4f(result);
@@ -40,9 +57,6 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f>{
 
     @Override
     public Vector4f multiplyingMatrixByVector(Vector4f vector) {
-        /*        if (vector.) {
-            throw new IllegalArgumentException("Вектор должен быть размерности 4");
-        }*/
         double[] result = new double[4];
         for (int i = 0; i < 4; i++) {
             result[i] = elements[i][0] * vector.getX() +
@@ -76,6 +90,73 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f>{
             }
         }
         return new Matrix4f(result);
+    }
+
+    @Override
+    public double findDeterminant() {
+        double determinant =
+                        this.elements[0][0] * minor(0, 0) -
+                        this.elements[0][1] * minor(0, 1) +
+                        this.elements[0][2] * minor(0, 2) -
+                        this.elements[0][3] * minor(0, 3);
+        return determinant;
+    }
+
+    @Override
+    public Matrix4f findInverseMatrix() {
+        double determinant = findDeterminant();
+        if (determinant == 0) {
+            throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");
+        }
+
+        double[][] adjugate = new double[4][4];
+
+        // Вычисляем алгебраические дополнения для каждого элемента матрицы
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                // Определяем знак для текущего элемента
+                double sign = ((i + j) % 2 == 0) ? 1 : -1;
+                // Вычисляем минор и умножаем на знак
+                adjugate[j][i] = sign * minor(i, j);  // Транспонируем сразу, меняя местами индексы
+            }
+        }
+
+        // Делим каждый элемент адъюнкт-матрицы на определитель
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                adjugate[i][j] /= determinant;
+
+                if (Math.abs(adjugate[i][j]) < 1e-10) {
+                    adjugate[i][j] = 0.0;
+                }
+            }
+        }
+
+        return new Matrix4f(adjugate);
+    }
+
+
+    private double minor(int row, int col) {
+        double[][] minorMatrix = new double[3][3];
+        int minorRow = 0, minorCol;
+
+        for (int i = 0; i < 4; i++) {
+            if (i == row) continue;
+            minorCol = 0;
+            for (int j = 0; j < 4; j++) {
+                if (j == col) continue;
+                minorMatrix[minorRow][minorCol++] = this.elements[i][j];
+            }
+            minorRow++;
+        }
+
+        return determinantOf3x3(minorMatrix);
+    }
+
+    private double determinantOf3x3(double[][] matrix) {
+        return  matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
+                matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
+                matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]);
     }
 
     @Override

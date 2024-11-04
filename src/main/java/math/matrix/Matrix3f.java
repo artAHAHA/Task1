@@ -3,6 +3,8 @@ package math.matrix;
 import math.vectors.Vector;
 import math.vectors.Vector3f;
 
+import java.util.Arrays;
+
 public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     private final double[][] elements;
 
@@ -16,13 +18,27 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         }
     }
 
+    public static Matrix3f setZero() {
+        return new Matrix3f(new double[][] {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+        });
+    }
+    public static Matrix3f setIdentity() {
+        return new Matrix3f(new double[][]{
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1}
+        });
+    }
 
     @Override
     public Matrix3f add(Matrix3f other) {
         double[][] result = new double[3][3];
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                result[i][j] = this.elements[i][j] + this.elements[i][j];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result[i][j] = this.elements[i][j] + other.elements[i][j];
             }
         }
         return new Matrix3f(result);
@@ -31,9 +47,9 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     @Override
     public Matrix3f subtract(Matrix3f other) {
         double[][] result = new double[3][3];
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
-                result[i][j] = this.elements[i][j] - this.elements[i][j];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result[i][j] = this.elements[i][j] - other.elements[i][j];
             }
         }
         return new Matrix3f(result);
@@ -42,14 +58,11 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
 
     @Override
     public Vector3f multiplyingMatrixByVector(Vector3f vector) {
-/*        if (vector.) {
-            throw new IllegalArgumentException("Вектор должен быть размерности 3");
-        }*/
         double[] result = new double[3];
         for (int i = 0; i < 3; i++) {
             result[i] = elements[i][0] * vector.getX() +
-                        elements[i][1] * vector.getY() +
-                        elements[i][2] * vector.getZ();
+                    elements[i][1] * vector.getY() +
+                    elements[i][2] * vector.getZ();
         }
         return new Vector3f(result[0], result[1], result[2]);
     }
@@ -60,8 +73,8 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 result[i][j] = this.elements[i][0] * other.elements[0][j] +
-                               this.elements[i][1] * other.elements[1][j] +
-                               this.elements[i][2] * other.elements[2][j];
+                        this.elements[i][1] * other.elements[1][j] +
+                        this.elements[i][2] * other.elements[2][j];
             }
         }
         return new Matrix3f(result);
@@ -79,6 +92,73 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
+    public double findDeterminant() {
+        double determinant =
+                this.elements[0][0]*this.elements[1][1]*this.elements[2][2] +
+                this.elements[0][1]*this.elements[1][2]*this.elements[2][0] +
+                this.elements[1][0]*this.elements[2][1]*this.elements[0][2] -
+                this.elements[0][2]*this.elements[1][1]*this.elements[2][0] -
+                this.elements[0][1]*this.elements[1][0]*this.elements[2][2] -
+                this.elements[0][0]*this.elements[1][2]*this.elements[2][1]
+                ;
+        return determinant;
+    }
+
+    @Override
+    public Matrix3f findInverseMatrix() {
+        double determinant = findDeterminant();
+
+        if (determinant == 0) {
+            throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");
+        }
+
+        double[][] adjugate = new double[3][3];
+
+        // Вычисляем алгебраические дополнения
+        adjugate[0][0] = minor(0, 0) * 1;   // +M11
+        adjugate[0][1] = minor(0, 1) * -1;  // -M12
+        adjugate[0][2] = minor(0, 2) * 1;   // +M13
+
+        adjugate[1][0] = minor(1, 0) * -1;  // -M21
+        adjugate[1][1] = minor(1, 1) * 1;   // +M22
+        adjugate[1][2] = minor(1, 2) * -1;  // -M23
+
+        adjugate[2][0] = minor(2, 0) * 1;   // +M31
+        adjugate[2][1] = minor(2, 1) * -1;  // -M32
+        adjugate[2][2] = minor(2, 2) * 1;   // +M33
+
+        Matrix3f adjugateMatrix = new Matrix3f(adjugate).transpose();
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                adjugateMatrix.elements[i][j] /= determinant;
+            }
+        }
+
+        return adjugateMatrix;
+    }
+
+    private double minor(int row, int col) {
+        double[][] minorMatrix = new double[2][2];
+        int minorRow = 0;
+
+        for (int i = 0; i < 3; i++) {
+            if (i == row) continue;
+            int minorCol = 0;
+            for (int j = 0; j < 3; j++) {
+                if (j == col) continue;
+                minorMatrix[minorRow][minorCol++] = this.elements[i][j];
+            }
+            minorRow++;
+        }
+
+        return determinantOf2x2(minorMatrix);
+    }
+
+    private double determinantOf2x2(double[][] matrix) {
+        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+    }
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (double[] row : elements) {
@@ -90,4 +170,6 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         }
         return sb.toString();
     }
+
+
 }
