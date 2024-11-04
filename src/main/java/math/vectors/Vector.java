@@ -18,6 +18,5 @@ public interface Vector<T> {
 
     double scalarMultiplication(T other);
 
-    String toString();
 }
 
