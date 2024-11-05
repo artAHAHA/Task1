@@ -111,17 +111,13 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
 
         double[][] adjugate = new double[4][4];
 
-        // Вычисляем алгебраические дополнения для каждого элемента матрицы
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                // Определяем знак для текущего элемента
                 double sign = ((i + j) % 2 == 0) ? 1 : -1;
-                // Вычисляем минор и умножаем на знак
-                adjugate[j][i] = sign * minor(i, j);  // Транспонируем сразу, меняя местами индексы
+                adjugate[j][i] = sign * minor(i, j);
             }
         }
 
-        // Делим каждый элемент адъюнкт-матрицы на определитель
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 adjugate[i][j] /= determinant;

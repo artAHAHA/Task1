@@ -32,7 +32,7 @@ public class Vector4f implements Vector<Vector4f> {
         return Math.abs(x - other.x) < EPS &&
                 Math.abs(y - other.y) < EPS &&
                  Math.abs(z - other.z) < EPS &&
-                  Math.abs(w-other.z) < EPS;
+                  Math.abs(w-other.w) < EPS;
     }
 
     @Override
@@ -87,10 +87,10 @@ public class Vector4f implements Vector<Vector4f> {
         if (length == 0) {
             throw new ArithmeticException("Длина равна 0, вектор нормализовать нельзя");
         }
-        this.x /= length;
-        this.y /= length;
-        this.z /= length;
-        this.w /= length;
+        this.x = (double) Math.round(this.x / length * 10) / 10;
+        this.y = (double) Math.round(this.y / length * 10) / 10;
+        this.z = (double) Math.round(this.z / length * 10) / 10;
+        this.w = (double) Math.round(this.w / length * 10) / 10;
     }
 
     @Override

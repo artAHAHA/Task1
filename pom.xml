@@ -15,14 +15,28 @@
   </properties>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <!-- Зависимость JUnit Jupiter API -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.11.3</version>
+      <scope>test</scope>
     </dependency>
-
+    <!-- Зависимость JUnit Jupiter Engine -->
     <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.11.3</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Зависимость JUnit Platform Commons -->
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-commons</artifactId>
+      <version>1.11.3</version>
+    </dependency>
+    <dependency>
+
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>${javafx.version}</version>
@@ -100,12 +114,6 @@
           <artifactId>*</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 

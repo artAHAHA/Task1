@@ -63,8 +63,8 @@ public class Vector2f implements Vector<Vector2f> {
         if (length == 0) {
             throw new ArithmeticException("Длина равна 0, вектор нормализовать нельзя");
         }
-        this.x /= length;
-        this.y /= length;
+        this.x = (double) Math.round(this.x / length * 10) / 10;
+        this.y = (double) Math.round(this.y / length * 10) / 10;
     }
 
     @Override

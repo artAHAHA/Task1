@@ -115,17 +115,17 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         double[][] adjugate = new double[3][3];
 
         // Вычисляем алгебраические дополнения
-        adjugate[0][0] = minor(0, 0) * 1;   // +M11
-        adjugate[0][1] = minor(0, 1) * -1;  // -M12
-        adjugate[0][2] = minor(0, 2) * 1;   // +M13
+        adjugate[0][0] = minor(0, 0) * 1;
+        adjugate[0][1] = minor(0, 1) * -1;
+        adjugate[0][2] = minor(0, 2) * 1;
 
-        adjugate[1][0] = minor(1, 0) * -1;  // -M21
-        adjugate[1][1] = minor(1, 1) * 1;   // +M22
-        adjugate[1][2] = minor(1, 2) * -1;  // -M23
+        adjugate[1][0] = minor(1, 0) * -1;
+        adjugate[1][1] = minor(1, 1) * 1;
+        adjugate[1][2] = minor(1, 2) * -1;
 
-        adjugate[2][0] = minor(2, 0) * 1;   // +M31
-        adjugate[2][1] = minor(2, 1) * -1;  // -M32
-        adjugate[2][2] = minor(2, 2) * 1;   // +M33
+        adjugate[2][0] = minor(2, 0) * 1;
+        adjugate[2][1] = minor(2, 1) * -1;
+        adjugate[2][2] = minor(2, 2) * 1;
 
         Matrix3f adjugateMatrix = new Matrix3f(adjugate).transpose();
 
