@@ -1,4 +1,4 @@
-package Task1.entities;
+package Task1.entities.background;
 
 import java.awt.*;
 

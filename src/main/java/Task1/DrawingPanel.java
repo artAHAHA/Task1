@@ -1,9 +1,10 @@
 package Task1;
 
-import Task1.entities.Background;
-import Task1.entities.Boy;
-import Task1.entities.Girl;
+import Task1.entities.background.Background;
+import Task1.entities.characters.Character;
 
+
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,46 +18,57 @@ public class DrawingPanel extends JPanel implements ActionListener {
     private Timer timer;
 
     private int ticksFromStart = 0;
-    private Boy boy;
+    private final List<Character> characters;
+    private final List<Background> background;
+    //private Background background;
 
-    private Girl girl;
-    private Background background;
-
-    public DrawingPanel(final int timerDelay) {
+    public DrawingPanel(final int timerDelay, List<Character> characters, List<Background> background) {
         this.PANEL_WIDTH = 800;
         this.PANEL_HEIGHT = 600;
         this.TIMER_DELAY = timerDelay;
+        this.characters = characters;
+        this.background = background;
+
 
         timer = new Timer(timerDelay, this);
         timer.start();
 
-        background = new Background();
+        //background = new Background();
 
-        this.boy = new Boy(ticksFromStart, 900, 400, 400, Color.BLUE);
+       /* this.boy = new Boy(ticksFromStart, 900, 400, 400, Color.BLUE);
 
-        this.girl = new Girl(ticksFromStart, 900, 400, 400, Color.magenta);
+        this.girl = new Girl(ticksFromStart, 900, 400, 400, Color.magenta);*/
     }
+
 
     @Override
     protected void paintComponent(final Graphics gr) {
         super.paintComponent(gr);
 
-        background.paint(gr, PANEL_WIDTH, PANEL_HEIGHT);
+        background.getFirst().paint(gr, PANEL_WIDTH, PANEL_HEIGHT);
 
-        boy.setX(ticksFromStart);
+        int deltaX = 200;
+        for (int i = 0; i < characters.size(); i++) {
+            Character character = characters.get(i);
+            character.setX(ticksFromStart + i * deltaX);
+            character.paint(gr);
+        }
+    }
+
+
+/*        boy.setX(ticksFromStart);
 
         boy.paint(gr);
 
         girl.setX(ticksFromStart+200);
 
-        girl.paint(gr);
-    }
+        girl.paint(gr);*/
+
 
     @Override
     public void actionPerformed(final ActionEvent e) {
-        if (e.getSource() == timer) {
-            repaint();
-            ++ticksFromStart;
-        }
+        repaint();
+        ++ticksFromStart;
+
     }
 }
