@@ -1,10 +1,11 @@
 package Task1.entities.characters;
 
 import Task1.CustomGraphics.CustomGraphics;
+import Task1.entities.Drawable;
 
 import java.awt.*;
 
-public class Character implements CharacterInterface {
+public class Character implements Drawable {
     protected int x;
     protected int y;
     protected int BACKGROUND_WIDTH;
@@ -28,53 +29,28 @@ public class Character implements CharacterInterface {
         return y;
     }
 
-    @Override
+
     public void setX(int x) {
         this.x = x;
     }
 
-    @Override
+
     public void setY(int y) {
         this.y = y;
     }
 
-    @Override
+
     public void setWidth(int width) {
         this.BACKGROUND_WIDTH = width;
     }
 
-    @Override
+
     public void setHeight(int height) {
         this.BACKGROUND_HEIGHT = height;
     }
 
     public void moveX(int deltaX) {
         this.x += deltaX;
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        drawHead(g2d);
-
-        drawEye(g2d, x + (int) (BACKGROUND_WIDTH / 2.54), y + (int) (BACKGROUND_HEIGHT / 5.3));
-        drawEye(g2d, x + (int) (BACKGROUND_WIDTH / 1.89), y + (int) (BACKGROUND_HEIGHT / 5.3));
-
-        drawMouth(g2d);
-
-        drawCap(g2d);
-
-        drawBody(g2d);
-
-        drawArm(g2d, true);
-        drawArm(g2d, false);
-
-        drawLeg(g2d, true);
-        drawLeg(g2d, false);
-
-        drawClothes(g2d, true, clothesColor);
-        drawClothes(g2d, false, clothesColor);
     }
 
     protected void drawHead(Graphics2D g2d) {
@@ -150,5 +126,30 @@ public class Character implements CharacterInterface {
         int legX = isLeft ? x + (int) (BACKGROUND_WIDTH / 2.66666) : x + (int) (BACKGROUND_WIDTH / 1.9);
         g2d.setColor(clothesColor);
         g2d.fillRect(legX, y + (int) (BACKGROUND_HEIGHT / 1.22), BACKGROUND_WIDTH / 10, (int) (BACKGROUND_HEIGHT / 3));
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        drawHead(g2d);
+
+        drawEye(g2d, x + (int) (BACKGROUND_WIDTH / 2.54), y + (int) (BACKGROUND_HEIGHT / 5.3));
+        drawEye(g2d, x + (int) (BACKGROUND_WIDTH / 1.89), y + (int) (BACKGROUND_HEIGHT / 5.3));
+
+        drawMouth(g2d);
+
+        drawCap(g2d);
+
+        drawBody(g2d);
+
+        drawArm(g2d, true);
+        drawArm(g2d, false);
+
+        drawLeg(g2d, true);
+        drawLeg(g2d, false);
+
+        drawClothes(g2d, true, clothesColor);
+        drawClothes(g2d, false, clothesColor);
     }
 }

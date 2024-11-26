@@ -8,8 +8,8 @@ public class Boy extends Character {
     }
 
     @Override
-    public void paint(Graphics g){
-        super.paint(g);
+    public void draw(Graphics g){
+        super.draw(g);
         drawCap(g);
 
     }

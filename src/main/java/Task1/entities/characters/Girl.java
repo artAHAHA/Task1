@@ -2,14 +2,14 @@ package Task1.entities.characters;
 
 import java.awt.*;
 
-public class Girl extends Boy {
+public class Girl extends Character {
     public Girl(int x, int y, int width, int height, Color clothesColor) {
         super(x, y, width, height, clothesColor);
     }
 
     @Override
-    public void paint(Graphics g){
-        super.paint(g);
+    public void draw(Graphics g){
+        super.draw(g);
         drawCap(g);
 
     }

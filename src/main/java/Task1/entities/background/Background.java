@@ -1,40 +1,32 @@
 package Task1.entities.background;
 
+import Task1.entities.Drawable;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Background {
+public class Background implements Drawable {
 
-    // Метод для отрисовки фона
-    public void paint(Graphics g, int width, int height) {
-        // небо
-        g.setColor(new Color(135, 206, 235));
-        g.fillRect(0, 0, width, height/2);
+    private final List<Drawable> elements;
 
-        // трава
-        g.setColor(new Color(34, 139, 34));
-        g.fillRect(0, height / 2, width, height / 2);
+    public Background(int width, int height) {
+        elements = new ArrayList<>();
 
-        // деревья
-        drawTree(g, 100, height / 2 - 50);
-        drawTree(g, 300, height / 2 - 50);
-        drawTree(g, 500, height / 2 - 50);
-
-        // кусты
-        drawBush(g, 200, height / 2);
-        drawBush(g, 400, height / 2);
+        elements.add(new Sky(width, height));
+        elements.add(new Grass(width,height));
+        elements.add(new Tree(width/8, (int) (height/2.4)));
+        elements.add(new Tree((int) (width/2.67), (int) (height/2.4)));
+        elements.add(new Tree((int) (width/1.6), (int) (height/2.4)));
+        elements.add(new Bush(width/4, height/2));
+        elements.add(new Bush(width/2, height/2));
     }
 
-    private void drawTree(Graphics g, int x, int y) {
+    @Override
+    public void draw(Graphics g) {
 
-        g.setColor(new Color(139, 69, 19));
-        g.fillRect(x, y, 20, 100);
-
-        g.setColor(new Color(0, 128, 0));
-        g.fillOval(x - 30, y - 40, 80, 80);
-    }
-
-    private void drawBush(Graphics g, int x, int y) {
-        g.setColor(new Color(0, 100, 0));
-        g.fillOval(x - 20, y - 10, 40, 40);
+        for (Drawable element : elements) {
+            element.draw(g);
+        }
     }
 }
