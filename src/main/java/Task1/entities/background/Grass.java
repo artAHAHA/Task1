@@ -16,7 +16,27 @@ public class Grass implements Drawable {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(34, 139, 34)); // Set color to grass green
-        g.fillRect(0, height / 2, width, height / 2);  // Draw the grass
+        g.setColor(new Color(34, 139, 34));
+        g.fillRect(0, height / 2, width, height / 2);
+    }
+
+    @Override
+    public void setX(int x) {
+
+    }
+
+    @Override
+    public void moveX(int i) {
+
+    }
+
+    @Override
+    public int getX() {
+        return 0;
+    }
+
+    @Override
+    public int getY() {
+        return 0;
     }
 }

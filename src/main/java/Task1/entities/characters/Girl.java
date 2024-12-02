@@ -3,8 +3,8 @@ package Task1.entities.characters;
 import java.awt.*;
 
 public class Girl extends Character {
-    public Girl(int x, int y, int width, int height, Color clothesColor) {
-        super(x, y, width, height, clothesColor);
+    public Girl(int x, int y, int width, int height, Color clothesColor, boolean useCustomDrawer) {
+        super(x, y, width, height, clothesColor, useCustomDrawer);
     }
 
     @Override

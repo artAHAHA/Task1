@@ -1,6 +1,8 @@
 package Task1.entities.characters;
 
-import Task1.CustomGraphics.CustomGraphics;
+import Task1.CustomGraphics.CustomOvalDrawer;
+import Task1.CustomGraphics.OvalDrawer;
+import Task1.CustomGraphics.StandardOvalDrawer;
 import Task1.entities.Drawable;
 
 import java.awt.*;
@@ -11,15 +13,16 @@ public class Character implements Drawable {
     protected int BACKGROUND_WIDTH;
     protected int BACKGROUND_HEIGHT;
     protected Color clothesColor;
-    private CustomGraphics customGraphics;
-
-    public Character(final int x, final int y, final int width, final int height, final Color clothesColor) {
+    protected OvalDrawer ovalDrawer;
+    public Character(final int x, final int y, final int width, final int height, final Color clothesColor, boolean useCustomDrawer) {
         this.x = x / 5;
         this.y = y / 5;
         this.BACKGROUND_WIDTH = width / 2;
         this.BACKGROUND_HEIGHT = height / 2;
         this.clothesColor = clothesColor;
+        this.ovalDrawer = useCustomDrawer ? new CustomOvalDrawer() : new StandardOvalDrawer();
     }
+
 
     public int getX() {
         return x;
@@ -29,7 +32,7 @@ public class Character implements Drawable {
         return y;
     }
 
-
+    @Override
     public void setX(int x) {
         this.x = x;
     }
@@ -58,7 +61,7 @@ public class Character implements Drawable {
         g2d.setColor(Color.PINK);
         g2d.fillOval(x + (int) (BACKGROUND_WIDTH / 3.2), y + BACKGROUND_HEIGHT / 16, (int) (BACKGROUND_WIDTH / 2.6), (int) (BACKGROUND_HEIGHT / 2.6)); // Голова
         g2d.setColor(Color.BLACK);
-        CustomGraphics.drawOval(g2d,x + (int) (BACKGROUND_WIDTH / 3.2), y + BACKGROUND_HEIGHT / 16, (int) (BACKGROUND_WIDTH / 2.6), (int) (BACKGROUND_HEIGHT / 2.6));
+        ovalDrawer.drawOval(g2d,x + (int) (BACKGROUND_WIDTH / 3.2), y + BACKGROUND_HEIGHT / 16, (int) (BACKGROUND_WIDTH / 2.6), (int) (BACKGROUND_HEIGHT / 2.6));
     }
 
     protected void drawEye(Graphics2D g2d, int x, int y) {
@@ -66,12 +69,12 @@ public class Character implements Drawable {
         g2d.setColor(Color.WHITE);
         g2d.fillOval(x, y, BACKGROUND_WIDTH / 10, BACKGROUND_WIDTH / 10);
         g2d.setColor(Color.BLACK);
-        CustomGraphics.drawOval(g2d, x, y, BACKGROUND_WIDTH / 10, BACKGROUND_WIDTH / 10);
+        ovalDrawer.drawOval(g2d, x, y, BACKGROUND_WIDTH / 10, BACKGROUND_WIDTH / 10);
 
         g2d.setColor(Color.BLUE);
         g2d.fillOval(x + BACKGROUND_WIDTH / 40, y + BACKGROUND_WIDTH / 40, BACKGROUND_WIDTH / 20, BACKGROUND_WIDTH / 20);
         g2d.setColor(Color.GRAY);
-        CustomGraphics.drawOval(g2d, x + BACKGROUND_WIDTH / 40, y + BACKGROUND_WIDTH / 40, BACKGROUND_WIDTH / 20, BACKGROUND_WIDTH / 20);
+        ovalDrawer.drawOval(g2d, x + BACKGROUND_WIDTH / 40, y + BACKGROUND_WIDTH / 40, BACKGROUND_WIDTH / 20, BACKGROUND_WIDTH / 20);
 
         g2d.setColor(Color.BLACK);
         g2d.fillOval(x + BACKGROUND_WIDTH / 27, y + BACKGROUND_WIDTH / 27, BACKGROUND_WIDTH / 40, BACKGROUND_WIDTH / 40);

@@ -2,8 +2,9 @@ package Task1.CustomGraphics;
 
 import java.awt.*;
 
-public class CustomGraphics {
-    public static void drawOval(Graphics2D g2d, int x, int y, int width, int height) {
+public class CustomOvalDrawer implements OvalDrawer {
+    @Override
+    public void drawOval(Graphics2D g2d, int x, int y, int width, int height) {
         int a = width / 2;
         int b = height / 2;
         int centerX = x + a;

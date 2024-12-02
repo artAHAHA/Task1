@@ -1,5 +1,6 @@
 package Task1;
 
+import Task1.entities.Drawable;
 import Task1.entities.characters.Boy;
 import Task1.entities.characters.Girl;
 import Task1.entities.background.Background;
@@ -23,12 +24,12 @@ public class MainWindow extends JFrame {
 
         Background background = new Background(width, height);
 
-        List<Character> characters = new ArrayList<>();
-        characters.add(new Boy(200, 900, 400, 400, Color.BLUE));
-        characters.add(new Girl(200, 900, 400, 400, Color.MAGENTA));
+        List<Drawable> drawables = new ArrayList<>();
+        drawables.add(new Boy(200, 900, 400, 400, Color.BLUE, true));
+        drawables.add(new Girl(200, 900, 400, 400, Color.MAGENTA, false));
 
 
-        panel = new DrawingPanel(100, characters, background);
+        panel = new DrawingPanel(100, drawables, background);
         this.add(panel);
 
         this.setSize(width, height);

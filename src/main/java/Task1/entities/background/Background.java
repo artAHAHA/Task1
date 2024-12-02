@@ -9,6 +9,7 @@ import java.util.List;
 public class Background implements Drawable {
 
     private final List<Drawable> elements;
+    private int x;
 
     public Background(int width, int height) {
         elements = new ArrayList<>();
@@ -29,4 +30,25 @@ public class Background implements Drawable {
             element.draw(g);
         }
     }
+
+    @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
+    public void moveX(int i) {
+
+    }
+
+    @Override
+    public int getX() {
+        return 0;
+    }
+
+    @Override
+    public int getY() {
+        return 0;
+    }
+
 }
