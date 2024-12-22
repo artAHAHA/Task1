@@ -1,4 +1,4 @@
-package Task1.entities;
+package com.example.Task1.entities;
 
 import java.awt.*;
 

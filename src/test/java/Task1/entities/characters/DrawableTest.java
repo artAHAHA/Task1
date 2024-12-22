@@ -1,6 +1,8 @@
 package Task1.entities.characters;
 
-import Task1.entities.Drawable;
+import com.example.Task1.entities.Drawable;
+import com.example.Task1.entities.characters.Boy;
+import com.example.Task1.entities.characters.Girl;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

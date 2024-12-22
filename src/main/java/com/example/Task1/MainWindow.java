@@ -1,10 +1,9 @@
-package Task1;
+package com.example.Task1;
 
-import Task1.entities.Drawable;
-import Task1.entities.characters.Boy;
-import Task1.entities.characters.Girl;
-import Task1.entities.background.Background;
-import Task1.entities.characters.Character;
+import com.example.Task1.entities.Drawable;
+import com.example.Task1.entities.characters.Boy;
+import com.example.Task1.entities.characters.Girl;
+import com.example.Task1.entities.background.Background;
 
 import javax.swing.*;
 import java.awt.*;

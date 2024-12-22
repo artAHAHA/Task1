@@ -1,6 +1,6 @@
-package Task1.entities.background;
+package com.example.Task1.entities.background;
 
-import Task1.entities.Drawable;
+import com.example.Task1.entities.Drawable;
 
 import java.awt.*;
 import java.util.ArrayList;

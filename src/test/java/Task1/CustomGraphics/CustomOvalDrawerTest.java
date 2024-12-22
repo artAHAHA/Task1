@@ -1,5 +1,6 @@
 package Task1.CustomGraphics;
 
+import com.example.Task1.CustomGraphics.CustomOvalDrawer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;

@@ -1,9 +1,9 @@
-package Task1.entities.characters;
+package com.example.Task1.entities.characters;
 
-import Task1.CustomGraphics.CustomOvalDrawer;
-import Task1.CustomGraphics.OvalDrawer;
-import Task1.CustomGraphics.StandardOvalDrawer;
-import Task1.entities.Drawable;
+import com.example.Task1.CustomGraphics.CustomOvalDrawer;
+import com.example.Task1.CustomGraphics.OvalDrawer;
+import com.example.Task1.CustomGraphics.StandardOvalDrawer;
+import com.example.Task1.entities.Drawable;
 
 import java.awt.*;
 

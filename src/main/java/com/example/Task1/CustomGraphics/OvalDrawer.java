@@ -1,4 +1,4 @@
-package Task1.CustomGraphics;
+package com.example.Task1.CustomGraphics;
 
 import java.awt.*;
 

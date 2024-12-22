@@ -1,7 +1,7 @@
-package Task1;
+package com.example.Task1;
 
-import Task1.entities.Drawable;
-import Task1.entities.background.Background;
+import com.example.Task1.entities.Drawable;
+import com.example.Task1.entities.background.Background;
 
 import java.util.List;
 import javax.swing.*;

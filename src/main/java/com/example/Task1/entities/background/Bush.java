@@ -1,25 +1,22 @@
-package Task1.entities.background;
+package com.example.Task1.entities.background;
 
-import Task1.entities.Drawable;
+import com.example.Task1.entities.Drawable;
 
 import java.awt.*;
 
-public class Tree implements Drawable {
+public class Bush implements Drawable {
     private final int x;
     private final int y;
 
-    public Tree(int x, int y) {
+    public Bush(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(new Color(139, 69, 19));
-        g.fillRect(x, y, 20, 100);
-
-        g.setColor(new Color(0, 128, 0));
-        g.fillOval(x - 30, y - 40, 80, 80);
+        g.setColor(new Color(0, 100, 0));
+        g.fillOval(x - 20, y - 10, 40, 40);
     }
 
     @Override
